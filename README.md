@@ -45,38 +45,32 @@ limitations under the License.
 
 <!-- Package usage documentation. -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/ndarray-input-casting-policies
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-policies = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-input-casting-policies@umd/browser.js' )
-```
-
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var policies = require( 'path/to/vendor/umd/ndarray-input-casting-policies/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-input-casting-policies@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.policies;
-})();
-</script>
+var policies = require( '@stdlib/ndarray-input-casting-policies' );
 ```
 
 #### policies()
@@ -90,7 +84,7 @@ var out = policies();
 
 The output array contains the following policies:
 
--   `none`: do not cast an input ndarray.
+-   `none`: no guidance on specific casting behavior. An input ndarray may or may not be cast depending on the needs of an implementation.
 -   `promoted`: cast an input ndarray to a promoted data type.
 -   `accumulation`: cast an input ndarray to a data type amenable to accumulation.
 -   `output`: cast an input ndarray to the data type of the output ndarray.
@@ -102,6 +96,17 @@ The output array contains the following policies:
 <!-- Package usage notes. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
 
 <section class="notes">
+
+## Notes
+
+-   The following is some general guidance for the casting policies listed above:
+
+    -   **none**: applies whenever an input ndarray casting behavior should be entirely left up to an implementation. For example, an implementation may choose to cast internally in order to take advantage of specialized algorithms operating on specific data types.
+    -   **promoted**: applies whenever an input ndarray should be cast to the data type resolved from applying the rules of [type promotion][@stdlib/ndarray/promotion-rules] to an implementation's input and output ndarrays. For example, suppose an implementation is computing the sum and the data type of the input ndarray is `int32` and the data type of the output ndarray is `float32`. In this scenario, casting `int32` to `float32` is not desirable as not all `int32` values can be safely represented in `float32`, thus potentially leading to significant accumulated numerical error. Instead, we can promote `int32` to `float64`, compute the sum, and then downcast the result for more accurate summation.
+    -   **accumulation**: applies whenever an input ndarray should be cast to a data type amenable to accumulation, irrespective of the output ndarray or other input ndarrays. For example, suppose an implementation is computing the sum and determining whether the sum passes a threshold, and further suppose that the data type of the input ndarray is `int8` and the data type of the output ndarray is `bool`. In this scenario, as `int8` has a small range of values, computing the sum has a high risk of overflow, rending the results potentially meaningless, and type promotion is not applicable. As such, an implementation may prefer to internally cast `int8` to a data type more amenable to accumulation, such as `int32`.
+    -   **output**: applies whenever an input ndarray should always be cast to the data type of the output ndarray. This might apply whenever an implementation wraps a type homogeneous interface, such as those commonly found in BLAS/LAPACK routines.
+
+-   Whether an implementation supports a casting policy depends on the implementation. Supporting casting policies is mainly envisioned for generalized utilities wrapping lower-level APIs and needing to accommodate varied use cases (e.g., [`@stdlib/ndarray-base/unary-reduce-strided1d-dispatch`][@stdlib/ndarray/base/unary-reduce-strided1d-dispatch]). Exposing casting policies as part of user-facing APIs is generally not a good idea.
 
 </section>
 
@@ -115,14 +120,9 @@ The output array contains the following policies:
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/utils-index-of@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-input-casting-policies@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var indexOf = require( '@stdlib/utils-index-of' );
+var policies = require( '@stdlib/ndarray-input-casting-policies' );
 
 var POLICIES = policies();
 
@@ -144,11 +144,6 @@ bool = isPolicy( 'promoted' );
 
 bool = isPolicy( 'beep' );
 // returns false
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -242,6 +237,10 @@ Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
 [branches-url]: https://github.com/stdlib-js/ndarray-input-casting-policies/blob/main/branches.md
 
 [stdlib-license]: https://raw.githubusercontent.com/stdlib-js/ndarray-input-casting-policies/main/LICENSE
+
+[@stdlib/ndarray/promotion-rules]: https://github.com/stdlib-js/ndarray-promotion-rules
+
+[@stdlib/ndarray/base/unary-reduce-strided1d-dispatch]: https://github.com/stdlib-js/ndarray-base-unary-reduce-strided1d-dispatch
 
 </section>
 
