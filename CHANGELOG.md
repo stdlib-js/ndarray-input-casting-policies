@@ -10,6 +10,7 @@
 
 ### Features
 
+-   [`0cf010e`](https://github.com/stdlib-js/stdlib/commit/0cf010ebd42bc5e06c935c023e41d98a2571300d) - add accumulation input casting policy
 -   [`a4c7f4f`](https://github.com/stdlib-js/stdlib/commit/a4c7f4f5eed4b028a397e11a40e2c0cf80517703) - add `ndarray/input-casting-policies`
 
 </section>
@@ -22,6 +23,7 @@
 
 <details>
 
+-   [`0cf010e`](https://github.com/stdlib-js/stdlib/commit/0cf010ebd42bc5e06c935c023e41d98a2571300d) - **feat:** add accumulation input casting policy _(by Athan Reines)_
 -   [`a4c7f4f`](https://github.com/stdlib-js/stdlib/commit/a4c7f4f5eed4b028a397e11a40e2c0cf80517703) - **feat:** add `ndarray/input-casting-policies` _(by Athan Reines)_
 
 </details>
