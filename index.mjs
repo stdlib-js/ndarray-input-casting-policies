@@ -1,0 +1,4 @@
+// Copyright (c) 2026 The Stdlib Authors. License is Apache-2.0: http://www.apache.org/licenses/LICENSE-2.0
+/// <reference types="./index.d.ts" />
+import t from"https://cdn.jsdelivr.net/gh/stdlib-js/utils-define-nonenumerable-read-only-property@v0.2.1-esm/index.mjs";import e from"https://cdn.jsdelivr.net/gh/stdlib-js/utils-define-read-only-property@v0.2.2-esm/index.mjs";import n from"https://cdn.jsdelivr.net/gh/stdlib-js/utils-keys@v0.2.2-esm/index.mjs";var o=["none","promoted","accumulation","output"];function r(){return o.slice()}function s(){return{none:0,promoted:1,accumulation:2,output:3}}t(r,"enum",s),function(t,o){var r,s,i;for(r=n(o),i=0;i<r.length;i++)s=r[i],e(t,s,o[s])}(r,{none:0,promoted:1,accumulation:2,output:3});export{r as default,s as enum};
+//# sourceMappingURL=index.mjs.map
