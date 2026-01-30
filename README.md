@@ -52,13 +52,18 @@ limitations under the License.
 ## Usage
 
 ```javascript
+import policies from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-input-casting-policies@esm/index.mjs';
+```
+The previous example will load the latest bundled code from the esm branch. Alternatively, you may load a specific version by loading the file from one of the [tagged bundles](https://github.com/stdlib-js/ndarray-input-casting-policies/tags). For example,
+
+```javascript
 import policies from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-input-casting-policies@v0.1.0-esm/index.mjs';
 ```
 
 You can also import the following named exports from the package:
 
 ```javascript
-import { enum } from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-input-casting-policies@v0.1.0-esm/index.mjs';
+import { enum } from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-input-casting-policies@esm/index.mjs';
 ```
 
 #### policies()
@@ -115,7 +120,7 @@ The output array contains the following policies:
 <script type="module">
 
 import indexOf from 'https://cdn.jsdelivr.net/gh/stdlib-js/utils-index-of@esm/index.mjs';
-import policies from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-input-casting-policies@v0.1.0-esm/index.mjs';
+import policies from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-input-casting-policies@esm/index.mjs';
 
 var POLICIES = policies();
 
